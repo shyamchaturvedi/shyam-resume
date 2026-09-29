@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shyam Chaturvedi | Founder & Tech Builder</title>
+    <meta name="description" content="Official Portfolio of Shyam Chaturvedi - Founder of Aroventech, Accounts & MIS Executive, Flutter & Web Developer.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #f97316;
+            --primary-dim: rgba(249,115,22,0.12);
+            --primary-glow: rgba(249,115,22,0.35);
+            --primary-light: #fdba74;
+            --accent-blue: #38bdf8;
+            --accent-purple: #a78bfa;
+            --bg: #060b17;
+            --bg-card: rgba(15,23,42,0.7);
+            --bg-card2: rgba(22,33,56,0.65);
+            --border: rgba(255,255,255,0.07);
+            --border-glow: rgba(249,115,22,0.28);
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --dim: #475569;
+            --g-accent: linear-gradient(135deg,#f97316,#facc15);
+            --g-blue: linear-gradient(135deg,#38bdf8,#818cf8);
+            --g-card: linear-gradient(145deg,rgba(22,33,56,0.65),rgba(10,17,34,0.85));
+            --radius: 20px;
+            --radius-sm: 12px;
+            --ease: cubic-bezier(0.4,0,0.2,1);
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.65;
+        }
+
+        h1,h2,h3,h4 { font-family:'Outfit',sans-serif; }
+
+        /* ─── SCROLLBAR ─── */
+        ::-webkit-scrollbar { width:5px; }
+        ::-webkit-scrollbar-track { background:var(--bg); }
+        ::-webkit-scrollbar-thumb { background:var(--primary); border-radius:3px; }
+
+        /* ─── CANVAS ─── */
+        #canvas {
+            position:fixed; inset:0;
+            pointer-events:none; z-index:0; opacity:0.5;
+        }
+
+        /* ─── ORBS ─── */
+        .orb {
+            position:fixed; border-radius:50%;
+            filter:blur(100px); pointer-events:none; z-index:0;
+        }
+        .orb-1 { width:560px;height:560px;background:radial-gradient(circle,rgba(249,115,22,0.2),transparent 70%);top:-160px;right:-180px; animation:driftA 18s ease-in-out infinite alternate; }
+        .orb-2 { width:480px;height:480px;background:radial-gradient(circle,rgba(56,189,248,0.15),transparent 70%);bottom:0;left:-140px; animation:driftB 22s ease-in-out infinite alternate; }
+        .orb-3 { width:320px;height:320px;background:radial-gradient(circle,rgba(167,139,250,0.12),transparent 70%);top:50%;left:50%; animation:driftC 15s ease-in-out infinite alternate; }
+
+        @keyframes driftA { 0%{transform:translate(0,0)}100%{transform:translate(-60px,80px)} }
+        @keyframes driftB { 0%{transform:translate(0,0)}100%{transform:translate(80px,-60px)} }
+        @keyframes driftC { 0%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(1.3)} }
+
+        /* ─── LAYOUT ─── */
+        .wrap { position:relative; z-index:1; }
+        .container { max-width:1200px; margin:0 auto; padding:0 28px; }
+
+        /* ─── NAVBAR ─── */
+        nav {
+            position:fixed; top:14px; left:50%; transform:translateX(-50%);
+            width:min(calc(100% - 40px), 1080px);
+            background:rgba(6,11,23,0.7);
+            backdrop-filter:blur(20px);
+            border:1px solid var(--border);
+            border-radius:50px;
+            padding:13px 32px;
+            display:flex; align-items:center; justify-content:space-between;
+            z-index:900;
+            box-shadow:0 4px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+            transition:all 0.3s var(--ease);
+        }
+        nav.scrolled {
+            background:rgba(6,11,23,0.92);
+            border-color:rgba(249,115,22,0.18);
+            box-shadow:0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(249,115,22,0.08);
+        }
+
+        .nav-brand {
+            display:flex; align-items:center; gap:11px;
+            text-decoration:none; color:var(--text);
+            font-family:'Outfit',sans-serif; font-weight:800; font-size:19px;
+        }
+        .nav-logo-box {
+            width:36px; height:36px; border-radius:10px;
+            background:var(--g-accent);
+            display:flex; align-items:center; justify-content:center;
+            box-shadow:0 0 18px var(--primary-glow);
+            flex-shrink:0;
+        }
+        .nav-logo-box svg { stroke:#000; }
+
+        .nav-links { display:flex; gap:32px; list-style:none; }
+        .nav-links a {
+            color:var(--muted); text-decoration:none;
+            font-size:14px; font-weight:500; letter-spacing:0.01em;
+            transition:color 0.25s;
+            position:relative;
+        }
+        .nav-links a::after {
+            content:''; position:absolute; bottom:-3px; left:0;
+            width:0; height:1.5px; background:var(--primary);
+            border-radius:2px; transition:width 0.3s var(--ease);
+        }
+        .nav-links a:hover { color:#fff; }
+        .nav-links a:hover::after { width:100%; }
+
+        .btn-resume {
+            display:inline-flex; align-items:center; gap:7px;
+            background:var(--primary-dim);
+            border:1px solid rgba(249,115,22,0.4);
+            color:var(--primary-light);
+            padding:9px 20px; border-radius:30px;
+            font-size:13.5px; font-weight:600;
+            text-decoration:none; letter-spacing:0.01em;
+            transition:all 0.25s var(--ease);
+        }
+        .btn-resume:hover {
+            background:var(--primary); color:#000;
+            box-shadow:0 0 24px var(--primary-glow);
+            transform:translateY(-2px);
+        }
+        .btn-resume svg { transition:transform 0.25s; }
+        .btn-resume:hover svg { transform:translateY(1px); }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height:100vh;
+            display:flex; align-items:center;
+            padding:120px 0 80px;
+        }
+        .hero-inner {
+            display:grid; grid-template-columns:1.15fr 0.85fr;
+            gap:60px; align-items:center;
+        }
+
+        /* Status badge */
+        .status-badge {
+            display:inline-flex; align-items:center; gap:9px;
+            background:rgba(34,197,94,0.08);
+            border:1px solid rgba(34,197,94,0.25);
+            padding:6px 16px; border-radius:30px;
+            font-size:13px; font-weight:600; color:#4ade80;
+            margin-bottom:22px;
+            width:fit-content;
+        }
+        .status-dot {
+            width:8px; height:8px; border-radius:50%;
+            background:#22c55e;
+            box-shadow:0 0 0 3px rgba(34,197,94,0.2);
+            animation:pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot {
+            0%,100%{ box-shadow:0 0 0 3px rgba(34,197,94,0.2); }
+            50%{ box-shadow:0 0 0 6px rgba(34,197,94,0.08); }
+        }
+
+        .hero-title {
+            font-size:56px; font-weight:900;
+            line-height:1.1; letter-spacing:-1.5px;
+            margin-bottom:16px;
+        }
+        .g-text {
+            background:var(--g-accent);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+        }
+
+        .typing-row {
+            font-size:20px; font-weight:500;
+            color:var(--muted);
+            margin-bottom:22px; min-height:30px;
+        }
+        .typed {
+            color:var(--primary-light);
+            border-right:2px solid var(--primary);
+            padding-right:3px;
+            animation:blink 0.8s step-end infinite;
+        }
+        @keyframes blink {
+            from,to{ border-color:transparent }
+            50%{ border-color:var(--primary); }
+        }
+
+        .hero-desc {
+            font-size:15.5px; color:var(--muted);
+            line-height:1.75; margin-bottom:36px;
+            max-width:540px;
+        }
+        .hero-desc strong { color:var(--text); font-weight:600; }
+
+        .cta-row {
+            display:flex; flex-wrap:wrap; gap:14px; align-items:center;
+        }
+        .btn-primary {
+            display:inline-flex; align-items:center; gap:9px;
+            background:var(--g-accent);
+            color:#000; font-weight:700; font-size:15px;
+            padding:15px 32px; border-radius:14px;
+            text-decoration:none;
+            box-shadow:0 6px 28px var(--primary-glow);
+            transition:all 0.3s var(--ease);
+        }
+        .btn-primary:hover {
+            transform:translateY(-3px) scale(1.02);
+            box-shadow:0 12px 36px rgba(249,115,22,0.55);
+        }
+        .btn-secondary {
+            display:inline-flex; align-items:center; gap:9px;
+            background:rgba(255,255,255,0.04);
+            border:1px solid var(--border);
+            color:var(--text); font-weight:600; font-size:15px;
+            padding:15px 28px; border-radius:14px;
+            text-decoration:none;
+            transition:all 0.3s var(--ease);
+        }
+        .btn-secondary:hover {
+            background:rgba(255,255,255,0.08);
+            border-color:rgba(255,255,255,0.15);
+            transform:translateY(-3px);
+        }
+        .btn-whatsapp {
+            border-color:rgba(34,197,94,0.3);
+            color:#4ade80;
+        }
+        .btn-whatsapp:hover {
+            background:rgba(34,197,94,0.08);
+            border-color:rgba(34,197,94,0.5);
+        }
+
+        /* ─── HERO VISUAL ─── */
+        .hero-visual { display:flex; justify-content:center; align-items:center; }
+        .photo-frame {
+            position:relative;
+            width:340px; height:340px;
+        }
+        .photo-ring {
+            position:absolute; inset:-20px;
+            border-radius:50%;
+            background:conic-gradient(from 0deg, var(--primary), var(--accent-blue), var(--accent-purple), var(--primary));
+            animation:spin-ring 10s linear infinite;
+            filter:blur(18px); opacity:0.6;
+        }
+        @keyframes spin-ring { to{ transform:rotate(360deg); } }
+
+        .photo-inner {
+            position:absolute; inset:0;
+            border-radius:50%; overflow:hidden;
+            border:3px solid rgba(249,115,22,0.7);
+            background:#0f172a;
+            box-shadow:0 20px 60px rgba(0,0,0,0.7), inset 0 0 40px rgba(249,115,22,0.08);
+        }
+        .photo-inner img {
+            width:100%; height:100%;
+            object-fit:cover; object-position:55% 15%;
+            transition:transform 0.6s var(--ease);
+        }
+        .photo-inner:hover img { transform:scale(1.07); }
+
+        /* Floating chips */
+        .chip {
+            position:absolute;
+            background:rgba(6,11,23,0.88);
+            backdrop-filter:blur(16px);
+            border:1px solid var(--border);
+            border-radius:16px;
+            padding:12px 18px;
+            display:flex; align-items:center; gap:12px;
+            box-shadow:0 12px 30px rgba(0,0,0,0.5);
+            width:max-content;
+        }
+        .chip-1 { top:20px; left:-50px; animation:float 5s ease-in-out infinite; }
+        .chip-2 { bottom:20px; right:-40px; animation:float 5s ease-in-out infinite 2.5s; }
+        @keyframes float {
+            0%,100%{ transform:translateY(0); }
+            50%{ transform:translateY(-12px); }
+        }
+        .chip-icon {
+            width:38px; height:38px; border-radius:10px;
+            background:var(--primary-dim);
+            border:1px solid rgba(249,115,22,0.2);
+            display:flex; align-items:center; justify-content:center;
+            flex-shrink:0;
+            color:var(--primary-light);
+        }
+        .chip-title { font-size:13px; font-weight:700; color:#fff; }
+        .chip-sub { font-size:11px; color:var(--muted); margin-top:1px; }
+
+        /* ─── STATS BAR ─── */
+        .stats-bar {
+            margin-top:56px;
+            display:grid; grid-template-columns:repeat(4,1fr);
+            background:var(--g-card);
+            border:1px solid var(--border);
+            border-radius:var(--radius);
+            overflow:hidden;
+            backdrop-filter:blur(12px);
+        }
+        .stat {
+            padding:24px 20px; text-align:center;
+            border-right:1px solid var(--border);
+            transition:background 0.25s;
+        }
+        .stat:last-child { border-right:none; }
+        .stat:hover { background:rgba(249,115,22,0.05); }
+        .stat-val {
+            font-family:'Outfit',sans-serif;
+            font-size:34px; font-weight:800;
+            background:var(--g-accent);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+            line-height:1;
+        }
+        .stat-label {
+            font-size:12.5px; color:var(--muted); margin-top:6px; font-weight:500;
+        }
+
+        /* ─── SECTIONS ─── */
+        .section { padding:100px 0; position:relative; }
+        .section.alt { background:rgba(10,17,34,0.55); }
+
+        .sec-header { text-align:center; margin-bottom:60px; }
+        .sec-tag {
+            display:inline-flex; align-items:center; gap:6px;
+            color:var(--primary-light);
+            font-size:12.5px; font-weight:700;
+            letter-spacing:2px; text-transform:uppercase;
+            margin-bottom:10px;
+        }
+        .sec-tag::before,
+        .sec-tag::after {
+            content:''; flex:1; height:1px;
+            background:linear-gradient(to right, transparent, var(--primary), transparent);
+            width:40px;
+        }
+        .sec-heading {
+            font-size:40px; font-weight:800;
+            letter-spacing:-0.8px; line-height:1.1;
+        }
+        .sec-sub {
+            color:var(--muted); font-size:16px;
+            max-width:560px; margin:12px auto 0;
+        }
+
+        /* ─── SKILL CARDS ─── */
+        .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+
+        .skill-card {
+            background:var(--g-card);
+            border:1px solid var(--border);
+            border-radius:var(--radius);
+            padding:32px;
+            transition:all 0.35s var(--ease);
+            position:relative; overflow:hidden;
+        }
+        .skill-card::before {
+            content:''; position:absolute;
+            top:0; left:0; right:0; height:2px;
+            background:var(--g-accent); opacity:0;
+            transition:opacity 0.35s;
+        }
+        .skill-card:hover {
+            border-color:var(--border-glow);
+            transform:translateY(-8px);
+            box-shadow:0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(249,115,22,0.1);
+        }
+        .skill-card:hover::before { opacity:1; }
+
+        .skill-icon-wrap {
+            width:54px; height:54px; border-radius:14px;
+            background:var(--primary-dim);
+            border:1px solid rgba(249,115,22,0.2);
+            display:flex; align-items:center; justify-content:center;
+            margin-bottom:20px; color:var(--primary-light);
+        }
+        .skill-card-title {
+            font-size:20px; font-weight:700;
+            color:#fff; margin-bottom:10px;
+        }
+        .skill-card-desc {
+            color:var(--muted); font-size:13.5px; line-height:1.65;
+            margin-bottom:18px;
+        }
+        .pills { display:flex; flex-wrap:wrap; gap:7px; }
+        .pill {
+            font-size:11.5px; font-weight:500;
+            padding:5px 12px; border-radius:20px;
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.08);
+            color:#cbd5e1;
+        }
+        .pill.hi {
+            background:rgba(249,115,22,0.1);
+            border-color:rgba(249,115,22,0.3);
+            color:var(--primary-light);
+        }
+
+        /* ─── TIMELINE ─── */
+        .timeline { max-width:860px; margin:0 auto; position:relative; }
+        .timeline::before {
+            content:''; position:absolute;
+            left:22px; top:14px; bottom:14px; width:2px;
+            background:linear-gradient(180deg, var(--primary) 0%, rgba(249,115,22,0.05) 100%);
+        }
+        .t-item { position:relative; padding-left:60px; margin-bottom:36px; }
+        .t-dot {
+            position:absolute; left:13px; top:8px;
+            width:20px; height:20px;
+            background:var(--bg); border:3px solid var(--primary); border-radius:50%;
+            box-shadow:0 0 12px var(--primary-glow);
+        }
+        .t-card {
+            background:var(--g-card);
+            border:1px solid var(--border);
+            border-radius:var(--radius);
+            padding:28px 30px;
+            transition:all 0.3s var(--ease);
+        }
+        .t-card:hover {
+            border-color:var(--border-glow);
+            transform:translateX(8px);
+        }
+        .t-head {
+            display:flex; justify-content:space-between;
+            align-items:flex-start; flex-wrap:wrap;
+            gap:10px; margin-bottom:4px;
+        }
+        .t-role { font-size:18px; font-weight:700; color:#fff; }
+        .t-badge {
+            font-size:12px; font-weight:600; padding:4px 12px;
+            border-radius:20px;
+            background:rgba(249,115,22,0.12);
+            border:1px solid rgba(249,115,22,0.3);
+            color:var(--primary-light);
+            white-space:nowrap;
+        }
+        .t-company {
+            font-size:14px; font-weight:600;
+            color:var(--primary);
+            display:flex; align-items:center; gap:6px;
+            margin-bottom:14px;
+        }
+        .t-list {
+            padding-left:18px; color:var(--muted);
+            font-size:13.8px; line-height:1.7;
+        }
+        .t-list li { margin-bottom:4px; }
+
+        /* ─── PROJECTS ─── */
+        .proj-grid {
+            display:grid; grid-template-columns:repeat(2,1fr); gap:28px;
+        }
+        .proj-card {
+            background:var(--g-card);
+            border:1px solid var(--border);
+            border-radius:var(--radius);
+            padding:30px;
+            transition:all 0.35s var(--ease);
+            position:relative; overflow:hidden;
+        }
+        .proj-card::after {
+            content:''; position:absolute;
+            inset:0; border-radius:inherit;
+            background:linear-gradient(135deg, rgba(249,115,22,0.04) 0%, transparent 60%);
+            opacity:0; transition:opacity 0.35s;
+            pointer-events:none;
+        }
+        .proj-card:hover {
+            border-color:var(--border-glow);
+            transform:translateY(-8px);
+            box-shadow:0 24px 60px rgba(0,0,0,0.45);
+        }
+        .proj-card:hover::after { opacity:1; }
+        .proj-top {
+            display:flex; justify-content:space-between;
+            align-items:center; margin-bottom:18px;
+        }
+        .proj-icon-box {
+            width:52px; height:52px; border-radius:14px;
+            background:var(--primary-dim);
+            border:1px solid rgba(249,115,22,0.2);
+            display:flex; align-items:center; justify-content:center;
+            color:var(--primary-light);
+        }
+        .proj-cat {
+            font-size:11px; font-weight:700;
+            text-transform:uppercase; letter-spacing:1.2px;
+            color:var(--primary-light);
+            background:var(--primary-dim);
+            padding:5px 12px; border-radius:20px;
+        }
+        .proj-title {
+            font-size:21px; font-weight:700;
+            color:#fff; margin-bottom:10px;
+        }
+        .proj-desc {
+            color:var(--muted); font-size:14px; line-height:1.65; margin-bottom:20px;
+        }
+        .proj-tags { display:flex; flex-wrap:wrap; gap:7px; }
+        .proj-tag {
+            font-size:11px; font-weight:500;
+            background:rgba(255,255,255,0.04);
+            border:1px solid var(--border);
+            color:var(--muted);
+            padding:4px 10px; border-radius:6px;
+        }
+
+        /* ─── EDUCATION ─── */
+        .edu-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+        .edu-card {
+            background:var(--g-card);
+            border:1px solid var(--border);
+            border-radius:var(--radius);
+            padding:28px;
+            transition:all 0.3s var(--ease);
+        }
+        .edu-card:hover {
+            border-color:var(--border-glow);
+            transform:translateY(-6px);
+        }
+        .edu-icon {
+            width:48px; height:48px; border-radius:12px;
+            background:var(--primary-dim);
+            border:1px solid rgba(249,115,22,0.2);
+            display:flex; align-items:center; justify-content:center;
+            color:var(--primary-light);
+            margin-bottom:18px;
+        }
+        .edu-degree { font-size:17px; font-weight:700; color:#fff; margin-bottom:6px; }
+        .edu-inst { font-size:13.5px; font-weight:600; color:var(--primary); margin-bottom:4px; }
+        .edu-meta { font-size:12px; color:var(--dim); display:flex; align-items:center; gap:5px; }
+
+        /* ─── CONTACT ─── */
+        .contact-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:36px; align-items:start; }
+        .contact-card {
+            background:var(--g-card);
+            border:1px solid var(--border);
+            border-radius:var(--radius);
+            padding:36px;
+        }
+        .contact-card h3 {
+            font-size:22px; font-weight:700; margin-bottom:28px;
+        }
+        .c-method {
+            display:flex; align-items:center; gap:16px;
+            text-decoration:none; color:inherit;
+            margin-bottom:20px;
+            transition:transform 0.25s;
+        }
+        .c-method:hover { transform:translateX(4px); }
+        .c-method:hover .c-icon { background:var(--primary); border-color:var(--primary); }
+        .c-method:hover .c-icon svg { stroke:#000; }
+        .c-icon {
+            width:46px; height:46px; flex-shrink:0;
+            background:rgba(255,255,255,0.04);
+            border:1px solid var(--border);
+            border-radius:12px;
+            display:flex; align-items:center; justify-content:center;
+            color:var(--primary-light);
+            transition:all 0.25s var(--ease);
+        }
+        .c-label { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.8px; font-weight:600; }
+        .c-value { font-size:15px; color:#fff; font-weight:600; margin-top:1px; }
+
+        /* Form */
+        .form-card {
+            background:var(--g-card);
+            border:1px solid var(--border);
+            border-radius:var(--radius);
+            padding:36px;
+        }
+        .form-card h3 { font-size:22px; font-weight:700; margin-bottom:28px; }
+        .form-group { margin-bottom:18px; }
+        .form-label {
+            display:block; font-size:13px; font-weight:600;
+            color:#e2e8f0; margin-bottom:8px; letter-spacing:0.01em;
+        }
+        .form-input, .form-textarea {
+            width:100%;
+            background:rgba(6,11,23,0.7);
+            border:1px solid var(--border);
+            border-radius:var(--radius-sm);
+            padding:13px 16px;
+            color:#fff; font-family:inherit; font-size:14.5px;
+            outline:none;
+            transition:all 0.25s var(--ease);
+        }
+        .form-input:focus, .form-textarea:focus {
+            border-color:var(--primary);
+            box-shadow:0 0 0 3px rgba(249,115,22,0.12);
+        }
+        .form-textarea { resize:vertical; min-height:110px; }
+        .form-submit {
+            width:100%; display:flex; align-items:center; justify-content:center; gap:9px;
+            background:var(--g-accent);
+            color:#000; font-weight:700; font-size:15px;
+            padding:15px 28px; border-radius:14px;
+            border:none; cursor:pointer; font-family:inherit;
+            box-shadow:0 6px 24px var(--primary-glow);
+            transition:all 0.3s var(--ease);
+        }
+        .form-submit:hover {
+            transform:translateY(-3px);
+            box-shadow:0 12px 36px rgba(249,115,22,0.5);
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            border-top:1px solid var(--border);
+            padding:44px 0;
+            text-align:center;
+            background:rgba(6,11,23,0.7);
+        }
+        .footer-socials {
+            display:flex; justify-content:center; gap:14px; margin-bottom:20px;
+        }
+        .soc-btn {
+            width:42px; height:42px; border-radius:50%;
+            background:rgba(255,255,255,0.04);
+            border:1px solid var(--border);
+            display:flex; align-items:center; justify-content:center;
+            color:var(--muted);
+            text-decoration:none;
+            transition:all 0.25s var(--ease);
+        }
+        .soc-btn:hover {
+            background:var(--primary); border-color:var(--primary);
+            color:#000; transform:translateY(-3px);
+            box-shadow:0 6px 18px var(--primary-glow);
+        }
+        footer p { color:var(--muted); font-size:13.5px; }
+        footer strong { color:var(--text); }
+
+        /* ─── RESPONSIVE ─── */
+        @media(max-width: 960px) {
+            .hero-inner, .contact-grid { grid-template-columns:1fr; }
+            .hero-inner { text-align:center; }
+            .hero-desc { margin:0 auto 32px; }
+            .cta-row { justify-content:center; }
+            .status-badge { margin:0 auto 22px; }
+            .skills-grid, .edu-grid, .proj-grid { grid-template-columns:1fr; }
+            .stats-bar { grid-template-columns:repeat(2,1fr); }
+            .stat:nth-child(2) { border-right:none; }
+        }
+
+        @media(max-width: 680px) {
+            .nav-links { display:none; }
+            .hero-title { font-size:38px; }
+            .sec-heading { font-size:32px; }
+            .stats-bar { grid-template-columns:1fr; }
+            .stat { border-right:none; border-bottom:1px solid var(--border); }
+            .stat:last-child { border-bottom:none; }
+            .photo-frame { width:260px; height:260px; }
+            .chip-1 { left:-20px; }
+            .chip-2 { right:-10px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Background -->
+<canvas id="canvas"></canvas>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<div class="wrap">
+
+<!-- ─── NAVBAR ─── -->
+<nav id="navbar">
+    <a href="#hero" class="nav-brand">
+        <div class="nav-logo-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+        </div>
+        <span>Shyam.dev</span>
+    </a>
+
+    <ul class="nav-links">
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <a href="assets/SHYAM_CHATURVEDI_RESUME.pdf" target="_blank" class="btn-resume">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Resume PDF
+    </a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+    <div class="container">
+        <div class="hero-inner">
+            <!-- Left -->
+            <div>
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    Available for Opportunities
+                </div>
+
+                <h1 class="hero-title">
+                    Building Smarter<br>
+                    <span class="g-text">Business & Tech</span>
+                </h1>
+
+                <div class="typing-row">
+                    I am a <span class="typed" id="typed-output">Accounts & MIS Executive</span>
+                </div>
+
+                <p class="hero-desc">
+                    Hi, I'm <strong>Shyam Chaturvedi</strong> — Founder of <strong>Aroventech</strong> and Accounts &amp; MIS Executive at <strong>ST Group Of Corporation, Lucknow</strong>. I bridge 3+ years of finance operations with modern web, Flutter apps, and AI automation.
+                </p>
+
+                <div class="cta-row">
+                    <a href="#contact" class="btn-primary">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        Get in Touch
+                    </a>
+                    <a href="assets/SHYAM_CHATURVEDI_RESUME.pdf" target="_blank" class="btn-secondary">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download CV
+                    </a>
+                    <a href="https://wa.me/919598023701" target="_blank" class="btn-secondary btn-whatsapp">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Photo -->
+            <div class="hero-visual">
+                <div class="photo-frame">
+                    <div class="photo-ring"></div>
+                    <div class="photo-inner">
+                        <img src="assets/profile.png" alt="Shyam Chaturvedi">
+                    </div>
+
+                    <!-- Chip 1 -->
+                    <div class="chip chip-1">
+                        <div class="chip-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                        </div>
+                        <div>
+                            <div class="chip-title">Founder</div>
+                            <div class="chip-sub">Aroventech — MSME</div>
+                        </div>
+                    </div>
+
+                    <!-- Chip 2 -->
+                    <div class="chip chip-2">
+                        <div class="chip-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                        </div>
+                        <div>
+                            <div class="chip-title">MIS & Accounts</div>
+                            <div class="chip-sub">3+ Years Expertise</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-val">3+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat">
+                <div class="stat-val">33+</div>
+                <div class="stat-label">GitHub Repositories</div>
+            </div>
+            <div class="stat">
+                <div class="stat-val">8+</div>
+                <div class="stat-label">Live Projects</div>
+            </div>
+            <div class="stat">
+                <div class="stat-val">MSME</div>
+                <div class="stat-label">Registered Founder</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── SKILLS ─── -->
+<section class="section" id="skills">
+    <div class="container">
+        <div class="sec-header">
+            <div class="sec-tag">Core Capabilities</div>
+            <h2 class="sec-heading">Skills & Technology Stack</h2>
+            <p class="sec-sub">Combining financial precision, modern engineering, and intelligent automation to solve real business problems.</p>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon-wrap">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </div>
+                <h3 class="skill-card-title">Accounts & MIS Operations</h3>
+                <p class="skill-card-desc">Expert in automated management reports, dashboards, high-volume billing, and financial data workflows.</p>
+                <div class="pills">
+                    <span class="pill hi">Advanced Excel</span>
+                    <span class="pill hi">MIS Dashboards</span>
+                    <span class="pill">Billing Systems</span>
+                    <span class="pill">UPI Reconciliation</span>
+                    <span class="pill">Vendor Audits</span>
+                    <span class="pill">Office Admin</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon-wrap">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <h3 class="skill-card-title">Web & App Engineering</h3>
+                <p class="skill-card-desc">Building responsive digital products, Flutter Android apps, and modern UI/UX components for real-world deployment.</p>
+                <div class="pills">
+                    <span class="pill hi">Flutter / Dart</span>
+                    <span class="pill hi">HTML5 & CSS3</span>
+                    <span class="pill hi">JavaScript ES6+</span>
+                    <span class="pill">Git & GitHub</span>
+                    <span class="pill">Responsive Design</span>
+                    <span class="pill">REST APIs</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon-wrap">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 12l-3.5 6"/><path d="M12 12h7"/></svg>
+                </div>
+                <h3 class="skill-card-title">AI & Workflow Automation</h3>
+                <p class="skill-card-desc">Leveraging LLMs, prompt engineering, and custom automation scripts to dramatically increase operational efficiency.</p>
+                <div class="pills">
+                    <span class="pill hi">Prompt Engineering</span>
+                    <span class="pill hi">AI Workflow Design</span>
+                    <span class="pill">IoT / ESP32</span>
+                    <span class="pill">Automation Scripts</span>
+                    <span class="pill">Data Extraction</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── EXPERIENCE ─── -->
+<section class="section alt" id="experience">
+    <div class="container">
+        <div class="sec-header">
+            <div class="sec-tag">Career History</div>
+            <h2 class="sec-heading">Professional Journey</h2>
+            <p class="sec-sub">A consistent track record of financial precision, operational excellence, and entrepreneurial growth.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="t-item">
+                <div class="t-dot"></div>
+                <div class="t-card">
+                    <div class="t-head">
+                        <div class="t-role">Accounts & MIS Executive</div>
+                        <div class="t-badge">Jul 2023 — Present</div>
+                    </div>
+                    <div class="t-company">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                        ST Group Of Corporation, Lucknow
+                    </div>
+                    <ul class="t-list">
+                        <li>Designs and maintains daily MIS dashboards, executive summaries, and financial audit reports.</li>
+                        <li>Executes vendor payment settlements, UPI verification, and multi-bank reconciliations.</li>
+                        <li>Oversees office operations, financial documentation, and Excel-based process automation.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="t-item">
+                <div class="t-dot"></div>
+                <div class="t-card">
+                    <div class="t-head">
+                        <div class="t-role">Founder</div>
+                        <div class="t-badge">Jan 2025 — Present</div>
+                    </div>
+                    <div class="t-company">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        Aroventech — MSME Registered Venture
+                    </div>
+                    <ul class="t-list">
+                        <li>Building healthcare billing software, Flutter mobile apps, and AI-powered business tools.</li>
+                        <li>Advising SMBs on digital transformation, tech adoption, and operational efficiency.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="t-item">
+                <div class="t-dot"></div>
+                <div class="t-card">
+                    <div class="t-head">
+                        <div class="t-role">Receptionist / Front Desk Executive</div>
+                        <div class="t-badge">Jan 2022 — Jun 2023</div>
+                    </div>
+                    <div class="t-company">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        Tiwari Nursing Home
+                    </div>
+                    <ul class="t-list">
+                        <li>Managed patient registration, inquiries, billing receipts, and emergency coordination.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="t-item">
+                <div class="t-dot"></div>
+                <div class="t-card">
+                    <div class="t-head">
+                        <div class="t-role">Office Assistant & Customer Support</div>
+                        <div class="t-badge">Jan 2020 — Jan 2022</div>
+                    </div>
+                    <div class="t-company">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        Tiwari Multispeciality Hospital & The Care Hospital
+                    </div>
+                    <ul class="t-list">
+                        <li>Handled administrative documentation, hospital record management, and helpdesk support.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── PROJECTS ─── -->
+<section class="section" id="projects">
+    <div class="container">
+        <div class="sec-header">
+            <div class="sec-tag">Featured Work</div>
+            <h2 class="sec-heading">Projects & Innovations</h2>
+            <p class="sec-sub">Real-world systems engineered to solve operational challenges and scale business efficiency.</p>
+        </div>
+
+        <div class="proj-grid">
+            <!-- P1: Ramnambank -->
+            <div class="proj-card">
+                <div class="proj-top">
+                    <div class="proj-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                    </div>
+                    <span class="proj-cat">Web App · Live</span>
+                </div>
+                <h3 class="proj-title">RamNam Bank</h3>
+                <p class="proj-desc">A devotional digital platform — track, submit and manage Ram Naam counts. Built with TypeScript and deployed live on Vercel.</p>
+                <div class="proj-tags">
+                    <span class="proj-tag">TypeScript</span>
+                    <span class="proj-tag">Next.js</span>
+                    <span class="proj-tag">Vercel</span>
+                </div>
+                <div style="margin-top:16px;display:flex;gap:10px">
+                    <a href="https://www.ramnambank.site/" target="_blank" style="font-size:12px;color:var(--primary-light);text-decoration:none;display:flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a>
+                    <a href="https://github.com/shyamchaturvedi/ramnambank" target="_blank" style="font-size:12px;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a>
+                </div>
+            </div>
+
+            <!-- P2: Aroventech -->
+            <div class="proj-card">
+                <div class="proj-top">
+                    <div class="proj-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <span class="proj-cat">Company Website · Live</span>
+                </div>
+                <h3 class="proj-title">Aroventech Official Website</h3>
+                <p class="proj-desc">Official MSME company website for Aroventech — showcasing services, team, and business solutions for healthcare & SMBs. Built with JavaScript.</p>
+                <div class="proj-tags">
+                    <span class="proj-tag">JavaScript</span>
+                    <span class="proj-tag">Vercel</span>
+                    <span class="proj-tag">MSME</span>
+                </div>
+                <div style="margin-top:16px;display:flex;gap:10px">
+                    <a href="https://www.aroventech.site/" target="_blank" style="font-size:12px;color:var(--primary-light);text-decoration:none;display:flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a>
+                    <a href="https://github.com/shyamchaturvedi/aroventech" target="_blank" style="font-size:12px;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a>
+                </div>
+            </div>
+
+
+            <!-- P4: Ayodhya -->
+            <div class="proj-card">
+                <div class="proj-top">
+                    <div class="proj-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <span class="proj-cat">Web App · Live</span>
+                </div>
+                <h3 class="proj-title">Shree Ram Rajya Maha Yagya 2026</h3>
+                <p class="proj-desc">Official event website for Shree Ram Rajya Maha Yagya 2026 — a grand devotional event platform with schedule, registration, and live updates.</p>
+                <div class="proj-tags">
+                    <span class="proj-tag">JavaScript</span>
+                    <span class="proj-tag">Web Design</span>
+                    <span class="proj-tag">Vercel</span>
+                </div>
+                <div style="margin-top:16px;display:flex;gap:10px">
+                    <a href="https://www.sreeramrajyamahayagya2026.com/" target="_blank" style="font-size:12px;color:var(--primary-light);text-decoration:none;display:flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a>
+                    <a href="https://github.com/shyamchaturvedi/ayodhya" target="_blank" style="font-size:12px;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:32px">
+            <a href="https://github.com/shyamchaturvedi" target="_blank" class="btn-secondary" style="display:inline-flex;align-items:center;gap:9px">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                View All 33 Repos on GitHub
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ─── EDUCATION ─── -->
+<section class="section alt" id="education">
+    <div class="container">
+        <div class="sec-header">
+            <div class="sec-tag">Academic Background</div>
+            <h2 class="sec-heading">Education & Credentials</h2>
+        </div>
+
+        <div class="edu-grid" style="grid-template-columns:repeat(2,1fr)">
+            <div class="edu-card">
+                <div class="edu-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                </div>
+                <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
+                <div class="edu-inst">Noida International University</div>
+                <div class="edu-meta">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    2026 — Expected 2029
+                </div>
+            </div>
+
+            <div class="edu-card">
+                <div class="edu-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <div class="edu-degree">Full Stack Web Dev & AI Program</div>
+                <div class="edu-inst">HCL GUVI Professional Certification</div>
+                <div class="edu-meta">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Ongoing
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="section" id="contact">
+    <div class="container">
+        <div class="sec-header">
+            <div class="sec-tag">Let's Connect</div>
+            <h2 class="sec-heading">Get in Touch</h2>
+            <p class="sec-sub">Have a project, job opportunity, or collaboration in mind? Reach out directly.</p>
+        </div>
+
+        <div class="contact-grid">
+            <!-- Info -->
+            <div class="contact-card">
+                <h3>Direct Channels</h3>
+
+                <a href="tel:+919598023701" class="c-method">
+                    <div class="c-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.14 6.14l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </div>
+                    <div>
+                        <div class="c-label">Call / Phone</div>
+                        <div class="c-value">+91 9598023701</div>
+                    </div>
+                </a>
+
+                <a href="mailto:iammshyam@gmail.com" class="c-method">
+                    <div class="c-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <div>
+                        <div class="c-label">Email</div>
+                        <div class="c-value">iammshyam@gmail.com</div>
+                    </div>
+                </a>
+
+                <a href="https://www.aroventech.site/" target="_blank" class="c-method">
+                    <div class="c-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <div>
+                        <div class="c-label">Website</div>
+                        <div class="c-value">aroventech.site</div>
+                    </div>
+                </a>
+
+                <div class="c-method">
+                    <div class="c-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div>
+                        <div class="c-label">Location</div>
+                        <div class="c-value">Lucknow, Uttar Pradesh, India</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="form-card">
+                <h3>Send a Message</h3>
+                <form onsubmit="handleContact(event)">
+                    <div class="form-group">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" id="f-name" class="form-input" placeholder="Rahul Sharma" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email or Mobile</label>
+                        <input type="text" id="f-contact" class="form-input" placeholder="rahul@email.com / +91..." required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea id="f-msg" class="form-textarea" placeholder="Describe your project or inquiry..." required></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        Send via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <div class="container">
+        <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/shyam-chaturvedii" target="_blank" class="soc-btn" title="LinkedIn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://github.com/shyamchaturvedi" target="_blank" class="soc-btn" title="GitHub (33+ Repos)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <a href="https://wa.me/919598023701" target="_blank" class="soc-btn" title="WhatsApp">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </a>
+            <a href="mailto:iammshyam@gmail.com" class="soc-btn" title="Email">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+        </div>
+        <p>© 2026 <strong>Shyam Chaturvedi</strong> &nbsp;•&nbsp; Founder @ Aroventech &nbsp;•&nbsp; All rights reserved.</p>
+    </div>
+</footer>
+
+</div><!-- .wrap -->
+
+<script>
+    // ─── TYPING EFFECT ───
+    const roles = [
+        "Accounts & MIS Executive",
+        "Founder @ Aroventech",
+        "Flutter & Android Developer",
+        "AI Automation Specialist",
+        "BCA Scholar @ NIU"
+    ];
+    let ri = 0, ci = 0, del = false;
+    const el = document.getElementById('typed-output');
+    function type() {
+        const r = roles[ri];
+        el.textContent = del ? r.substring(0, ci - 1) : r.substring(0, ci + 1);
+        del ? ci-- : ci++;
+        let sp = del ? 40 : 78;
+        if (!del && ci === r.length) { sp = 2200; del = true; }
+        else if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; sp = 380; }
+        setTimeout(type, sp);
+    }
+    type();
+
+    // ─── NAVBAR SCROLL ───
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
+    });
+
+    // ─── PARTICLE CANVAS ───
+    const c = document.getElementById('canvas');
+    const ctx = c.getContext('2d');
+    let pts = [];
+
+    function resize() {
+        c.width = innerWidth;
+        c.height = innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    class Pt {
+        constructor() {
+            this.x = Math.random() * c.width;
+            this.y = Math.random() * c.height;
+            this.r = Math.random() * 1.6 + 0.5;
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.col = Math.random() > 0.55
+                ? 'rgba(249,115,22,0.45)'
+                : 'rgba(56,189,248,0.3)';
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x < 0) this.x = c.width;
+            if (this.x > c.width) this.x = 0;
+            if (this.y < 0) this.y = c.height;
+            if (this.y > c.height) this.y = 0;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            ctx.fillStyle = this.col;
+            ctx.fill();
+        }
+    }
+
+    const N = Math.min(Math.floor(innerWidth / 14), 75);
+    for (let i = 0; i < N; i++) pts.push(new Pt());
+
+    function animate() {
+        ctx.clearRect(0, 0, c.width, c.height);
+        for (let i = 0; i < pts.length; i++) {
+            pts[i].update();
+            pts[i].draw();
+            for (let j = i + 1; j < pts.length; j++) {
+                const dx = pts[i].x - pts[j].x;
+                const dy = pts[i].y - pts[j].y;
+                const d = Math.sqrt(dx * dx + dy * dy);
+                if (d < 100) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = 'rgba(255,255,255,' + (0.07 * (1 - d / 100)) + ')';
+                    ctx.lineWidth = 0.6;
+                    ctx.moveTo(pts[i].x, pts[i].y);
+                    ctx.lineTo(pts[j].x, pts[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    // ─── CONTACT FORM ───
+    function handleContact(e) {
+        e.preventDefault();
+        const n = document.getElementById('f-name').value;
+        const co = document.getElementById('f-contact').value;
+        const m = document.getElementById('f-msg').value;
+        const msg = 'Hello Shyam, I am ' + n + ' (' + co + '). ' + m;
+        window.open('https://wa.me/919598023701?text=' + encodeURIComponent(msg), '_blank');
+    }
+</script>
+
+</body>
+</html>

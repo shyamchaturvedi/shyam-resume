@@ -1,0 +1,632 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shyam Chaturvedi | Resume</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            background: #eef2f7;
+            color: #222;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            font-size: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+            font-weight: 600;
+            z-index: 1000;
+            transition: 0.2s;
+        }
+
+        .print-btn:hover {
+            background: #f57c00;
+            transform: scale(1.04);
+        }
+
+        /* Standard A4 Page Definition */
+        .page {
+            width: 210mm;
+            height: 296.5mm;
+            max-height: 296.5mm;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            position: relative;
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            background: linear-gradient(180deg, #111827 0%, #1e293b 100%);
+            color: #ffffff;
+            padding: 24px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .photo-container {
+            text-align: center;
+        }
+
+        .photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto;
+            display: block;
+            border: 4px solid #ff9800;
+            object-fit: cover;
+            object-position: 55% 15%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .side-name {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        .side-role {
+            text-align: center;
+            color: #ffb74d;
+            font-size: 12px;
+            line-height: 1.4;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .side-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .side-heading {
+            color: #ffb74d;
+            font-size: 13.5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border-bottom: 1.5px solid rgba(255, 183, 77, 0.35);
+            padding-bottom: 4px;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            font-size: 11px;
+            line-height: 1.4;
+            color: #e2e8f0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            word-break: break-word;
+        }
+
+        .contact-item span.icon {
+            color: #ff9800;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 152, 0, 0.4);
+            color: #f1f5f9;
+            font-size: 10px;
+            padding: 3px 7px;
+            border-radius: 4px;
+            font-weight: 400;
+        }
+
+        .lang-item, .interest-item {
+            font-size: 11px;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        /* Main Content Styling */
+        .main {
+            padding: 24px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            color: #1e293b;
+            background: #ffffff;
+        }
+
+        .header-block {
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 8px;
+        }
+
+        .main-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.3px;
+        }
+
+        .main-subtitle {
+            color: #ea580c;
+            font-size: 12.5px;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .section-title {
+            font-size: 14.5px;
+            color: #c2410c;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            border-left: 4px solid #ea580c;
+            padding-left: 8px;
+            margin-bottom: 6px;
+        }
+
+        .summary-text {
+            font-size: 11px;
+            line-height: 1.6;
+            color: #334155;
+            text-align: justify;
+        }
+
+        .job-card {
+            margin-bottom: 9px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .job-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .job-date {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .company-name {
+            color: #ea580c;
+            font-size: 11.5px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .bullet-list {
+            padding-left: 16px;
+            font-size: 10.8px;
+            line-height: 1.5;
+            color: #334155;
+        }
+
+        .bullet-list li {
+            margin-bottom: 2px;
+        }
+
+        /* Projects Section Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 7px;
+        }
+
+        .project-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 3.5px solid #ea580c;
+            padding: 7px 10px;
+            border-radius: 5px;
+        }
+
+        .project-title {
+            font-size: 11.5px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .project-desc {
+            font-size: 10px;
+            color: #64748b;
+            line-height: 1.35;
+            margin-top: 2px;
+        }
+
+        /* Education & Certs */
+        .edu-item {
+            margin-bottom: 7px;
+        }
+
+        .edu-degree {
+            font-size: 12px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .edu-inst {
+            font-size: 11px;
+            color: #ea580c;
+            font-weight: 500;
+        }
+
+        .edu-year {
+            font-size: 10px;
+            color: #64748b;
+        }
+
+        .cert-list {
+            padding-left: 16px;
+            font-size: 10.8px;
+            line-height: 1.5;
+            color: #334155;
+        }
+
+        .footer-note {
+            margin-top: auto;
+            padding-top: 8px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 10px;
+            color: #64748b;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+
+            body {
+                background: none;
+                padding: 0;
+                margin: 0;
+                gap: 0;
+            }
+
+            .print-btn {
+                display: none !important;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 210mm;
+                height: 297mm;
+                max-height: 297mm;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+
+    <!-- ================= PAGE 1 ================= -->
+    <div class="page">
+        <!-- Sidebar Page 1 -->
+        <div class="sidebar">
+            <div class="photo-container">
+                <img src="MY IMAGE.png" alt="Shyam Chaturvedi" class="photo">
+                <div class="side-name">SHYAM CHATURVEDI</div>
+                <div class="side-role">Accounts & MIS Executive<br>Founder - Aroventech</div>
+            </div>
+
+            <div class="side-section">
+                <div class="side-heading">Contact</div>
+                <div class="contact-list">
+                    <div class="contact-item">
+                        <span class="icon">📍</span>
+                        <span>Lucknow, Uttar Pradesh</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">📞</span>
+                        <span>+91 9598023701</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">✉️</span>
+                        <span>iammshyam@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">🌐</span>
+                        <span>aroventech.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">💼</span>
+                        <span>linkedin.com/in/shyam-chaturvedii</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">💻</span>
+                        <span>github.com/shyamchaturvedi</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-section">
+                <div class="side-heading">Key Skills</div>
+                <div class="skills-grid">
+                    <div class="skill-tag">Microsoft Excel</div>
+                    <div class="skill-tag">MIS Reporting</div>
+                    <div class="skill-tag">Billing Systems</div>
+                    <div class="skill-tag">Accounts Management</div>
+                    <div class="skill-tag">Financial Reconciliation</div>
+                    <div class="skill-tag">Data Entry & Analysis</div>
+                    <div class="skill-tag">Office Administration</div>
+                    <div class="skill-tag">HTML5 & CSS3</div>
+                    <div class="skill-tag">JavaScript & Flutter</div>
+                    <div class="skill-tag">Artificial Intelligence</div>
+                    <div class="skill-tag">Prompt Engineering</div>
+                </div>
+            </div>
+
+            <div class="side-section">
+                <div class="side-heading">Languages</div>
+                <div class="contact-list">
+                    <div class="lang-item"><strong>Hindi:</strong> Native Speaker</div>
+                    <div class="lang-item"><strong>English:</strong> Professional Working</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Column Page 1 -->
+        <div class="main">
+            <div class="header-block">
+                <div class="main-title">SHYAM CHATURVEDI</div>
+                <div class="main-subtitle">Accounts & MIS Executive | BCA Student | Founder @ Aroventech</div>
+            </div>
+
+            <div>
+                <div class="section-title">Professional Summary</div>
+                <p class="summary-text">
+                    Dedicated and detail-oriented Accounts & MIS Executive with 3+ years of experience in financial accounts, billing management, MIS reporting, financial reconciliation, and office administration. Currently working at ST Group Of Corporation while pursuing BCA from Noida International University. Founder of Aroventech, actively expanding expertise in Full Stack Web Development & AI via HCL GUVI Program. Highly passionate about workflow automation, software innovation, and startup scalability.
+                </p>
+            </div>
+
+            <div>
+                <div class="section-title">Work Experience</div>
+                
+                <!-- Job 1 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-title">Accounts & MIS Executive</div>
+                        <div class="job-date">Jul 2023 – Present</div>
+                    </div>
+                    <div class="company-name">ST Group Of Corporation, Lucknow</div>
+                    <ul class="bullet-list">
+                        <li>Design and maintain daily MIS management dashboards and financial summary reports.</li>
+                        <li>Handle end-to-end billing operations, customer account verification, and transaction tracking.</li>
+                        <li>Execute rigorous vendor payment tracking, bank reconciliation, and UPI settlement audits.</li>
+                        <li>Manage outgoing office operations, financial documentation, and workflow automation in Excel.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-title">Founder (Part-Time / Venture)</div>
+                        <div class="job-date">Jan 2025 – Present</div>
+                    </div>
+                    <div class="company-name">Aroventech (MSME Registered)</div>
+                    <ul class="bullet-list">
+                        <li>Leading product development for business automation software and AI-assisted tools.</li>
+                        <li>Developing modern Android applications using Flutter and responsive web solutions.</li>
+                        <li>Providing IT consulting and technical solutions for small businesses and healthcare clinics.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-title">Receptionist / Front Desk Executive</div>
+                        <div class="job-date">Jan 2022 – Jun 2023</div>
+                    </div>
+                    <div class="company-name">Tiwari Nursing Home</div>
+                    <ul class="bullet-list">
+                        <li>Supervised patient registration desk, inquiries, and customer communication.</li>
+                        <li>Assisted in billing calculations, payment receipts, and patient service coordination.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                <span>Shyam Chaturvedi — Resume</span>
+                <span>Page 1 of 2</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 2 ================= -->
+    <div class="page">
+        <!-- Sidebar Page 2 -->
+        <div class="sidebar">
+            <div class="side-section">
+                <div class="side-heading">Core Competencies</div>
+                <div class="skills-grid">
+                    <div class="skill-tag">Problem Solving</div>
+                    <div class="skill-tag">Team Leadership</div>
+                    <div class="skill-tag">Customer Support</div>
+                    <div class="skill-tag">Process Automation</div>
+                    <div class="skill-tag">Data Accuracy</div>
+                    <div class="skill-tag">Vendor Relations</div>
+                </div>
+            </div>
+
+            <div class="side-section">
+                <div class="side-heading">Interests & Focus</div>
+                <div class="contact-list">
+                    <div class="interest-item">🔹 Artificial Intelligence & LLMs</div>
+                    <div class="interest-item">🔹 Mobile & Web App Engineering</div>
+                    <div class="interest-item">🔹 Business Systems Automation</div>
+                    <div class="interest-item">🔹 Tech Entrepreneurship</div>
+                    <div class="interest-item">🔹 Financial Data Analysis</div>
+                </div>
+            </div>
+
+            <div class="side-section">
+                <div class="side-heading">Web & Profiles</div>
+                <div class="contact-list">
+                    <div class="contact-item">
+                        <span class="icon">🔗</span>
+                        <span><strong>Portfolio:</strong> aroventech.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">🔗</span>
+                        <span><strong>LinkedIn:</strong> /in/shyam-chaturvedii</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">🔗</span>
+                        <span><strong>GitHub:</strong> /shyamchaturvedi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Column Page 2 -->
+        <div class="main">
+            <div>
+                <div class="section-title">Additional Experience</div>
+
+                <!-- Job 4 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-title">Office Assistant</div>
+                        <div class="job-date">Jan 2021 – Jan 2022</div>
+                    </div>
+                    <div class="company-name">Tiwari Multispeciality Hospital</div>
+                    <ul class="bullet-list">
+                        <li>Managed administrative documentation, hospital record filing, and inventory registers.</li>
+                        <li>Supported accounts desk in daily bill clearing, receipt bookkeeping, and entry.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 5 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-title">Customer Service Executive</div>
+                        <div class="job-date">Jan 2020 – Jan 2021</div>
+                    </div>
+                    <div class="company-name">The Care Hospital</div>
+                    <ul class="bullet-list">
+                        <li>Handled visitor queries, patient intake guidance, and telephonic appointment scheduling.</li>
+                        <li>Maintained smooth inter-department communications and prompt query resolution.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-title">Education & Academic Background</div>
+                
+                <div class="edu-item">
+                    <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
+                    <div class="edu-inst">Noida International University</div>
+                    <div class="edu-year">2026 – Expected 2029</div>
+                </div>
+
+                <div class="edu-item">
+                    <div class="edu-degree">Professional Program in Web Development & AI</div>
+                    <div class="edu-inst">HCL GUVI Certification</div>
+                    <div class="edu-year">Ongoing</div>
+                </div>
+
+                <div class="edu-item">
+                    <div class="edu-degree">Computer Diploma</div>
+                    <div class="edu-inst">D.A.P. Abdul Kalam Technical Institute</div>
+                </div>
+
+                
+            </div>
+
+            <div>
+                <div class="section-title">Featured Projects</div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">Medical Billing Software</div>
+                        <div class="project-desc">Custom desktop billing application with automated invoicing & tax calculations.</div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Flutter Shop Application</div>
+                        <div class="project-desc">Cross-platform mobile e-commerce and inventory manager built with Flutter.</div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">AI Business Automation Tools</div>
+                        <div class="project-desc">Productivity scripts integrating AI APIs to automate reporting and data entry.</div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-title">Smart Room IoT System</div>
+                        <div class="project-desc">ESP32 microcontroller-based smart automation and relay control interface.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-title">Certifications</div>
+                <ul class="cert-list">
+                    <li>Full Stack Web Development & AI (HCL GUVI — Ongoing)</li>
+                    
+                </ul>
+            </div>
+
+            <div class="footer-note">
+                <span>Shyam Chaturvedi — Resume</span>
+                <span>Page 2 of 2</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
